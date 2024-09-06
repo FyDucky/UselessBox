@@ -7,14 +7,14 @@
 
 /*servo switch defines*/
 #define   SWITCH_MOTOR_PIN     	  4 
-#define   SWITCH_MOTOR_DELAY      5 
+#define   SWITCH_MOTOR_DELAY      750
 #define   SWITCH_MOTOR_MAX        180
 #define   SWITCH_MOTOR_MIN        0
 #define   SWITCH_MOTOR_STEPS      1
 
 /*switch end positions*/
-#define   UPPER_LIMIT             150
-#define   LOWER_LIMIT             50
+#define   UPPER_LIMIT             120
+#define   LOWER_LIMIT             0
 
 /*servo lid defines*/
 #define   LID_MOTOR_PIN     	  3 

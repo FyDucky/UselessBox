@@ -8,9 +8,12 @@ Servo motorBox;
 Servo switchBox;
 Servo lidBox;
 
+int switch_flag;
+
 
 void moveBoxMotor(void);
 void moveLidMotor(void);
+
 
 /**
  * @brief return randomly 1 or 2 
@@ -90,17 +93,22 @@ void moveLidMotor(void) {
  * @param select : position of the switch
  */
 void switchMotor(int select) {
-  int pos = 0;
   if(select == NO_1) {
-      switchBox.write(UPPER_LIMIT);                                  
+      switchBox.write(UPPER_LIMIT);
+      delay(SWITCH_MOTOR_DELAY);
+      switchBox.write(LOWER_LIMIT);
+      delay(SWITCH_MOTOR_DELAY);
   }                                   
   else if(select == NO_2) {           
-      switchBox.write(LOWER_LIMIT);                     
+      //switchBox.write(LOWER_LIMIT);
+      //delay(SWITCH_MOTOR_DELAY);
+      //switchBox.write(UPPER_LIMIT);
+      //delay(SWITCH_MOTOR_DELAY);               
   }
   else {
     ;
   }
-  delay(SWITCH_MOTOR_DELAY);
+  //delay(SWITCH_MOTOR_DELAY);
 }
 
 
