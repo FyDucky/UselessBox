@@ -6,7 +6,7 @@
 #define   BOX_MOTOR_STEPS         1
 
 /*servo switch defines*/
-#define   SWTICH_MOTOR_PIN     	  4 
+#define   SWITCH_MOTOR_PIN     	  4 
 #define   SWITCH_MOTOR_DELAY      5 
 #define   SWITCH_MOTOR_MAX        180
 #define   SWITCH_MOTOR_MIN        0

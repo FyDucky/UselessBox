@@ -28,7 +28,7 @@ int randomValue(void) {
  */
 void attachServo(void) {
   motorBox.attach(BOX_MOTOR_PIN);
-  switchBox.attach(SWTICH_MOTOR_PIN);
+  switchBox.attach(SWITCH_MOTOR_PIN);
   lidBox.attach(LID_MOTOR_PIN);
 }
 
