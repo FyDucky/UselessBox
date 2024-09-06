@@ -2,11 +2,20 @@
 #include <motors.h>
 #include <ultrasonic.h>
 
+/**
+ * @brief init the ultrasonic sensor 
+ * 
+ */
 void initSonicSensor(void) {
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
 }
 
+/**
+ * @brief Get the Distance object
+ * 
+ * @return float 
+ */
 float getDistance(void) {
   float duration, distance;
   digitalWrite(TRIG_PIN, LOW);
@@ -17,12 +26,14 @@ float getDistance(void) {
 
   duration = pulseIn(ECHO_PIN, HIGH);
   distance = (duration*.0343)/2;
-  //Serial.print("Distance: ");
-  //Serial.println(distance);
   delay(ULTRASONIC_DELAY);
   return distance;
 }
 
+/**
+ * @brief trigger the motor if an object (finger) is close to the sensor
+ * 
+ */
 void triggerMotor(void) {
   float distance = 0;
 

@@ -23,7 +23,7 @@ int randomValue(void) {
 }
 
 /**
- * @brief attaches motors 
+ * @brief attaches motors to use them
  * 
  */
 void attachServo(void) {
@@ -32,12 +32,19 @@ void attachServo(void) {
   lidBox.attach(LID_MOTOR_PIN);
 }
 
+/**
+ * @brief moves either the switch or the box motor
+ * 
+ */
 void moveMotor(void) {
+  /*get random value*/
   int select = randomValue();
-  if(select == 1) {
+  /*box moves*/
+  if(select == SELECT_NO1) {
     moveBoxMotor();
   }
-  else if(select == 2) {
+  /*switch is pushed down*/
+  else if(select == SELECT_NO2) {
     moveLidMotor();
   }
   else {
@@ -45,7 +52,10 @@ void moveMotor(void) {
   }
 }
 
-//TODO: add correct directions, just a prototype
+/**
+ * @brief moves the box motor 
+ * 
+ */
 void moveBoxMotor(void) {
   int pos = 0;
     for (pos = BOX_MOTOR_MIN; pos <= BOX_MOTOR_MAX; pos += BOX_MOTOR_STEPS) { // goes from 0 degrees to 180 degrees
@@ -58,6 +68,10 @@ void moveBoxMotor(void) {
   }
 }
 
+/**
+ * @brief moves the lid motor
+ * 
+ */
 void moveLidMotor(void) {
   int pos = 0;
     for (pos = LID_MOTOR_MIN; pos <= LID_MOTOR_MAX; pos += LID_MOTOR_STEPS) { // goes from 0 degrees to 180 degrees
@@ -70,7 +84,11 @@ void moveLidMotor(void) {
   }
 }
 
-//TODO: Implement switch behaviour
+/**
+ * @brief behaviour of the motor depending on the switch
+ * 
+ * @param select : position of the switch
+ */
 void switchMotor(int select) {
   int pos = 0;
   if(select == NO_1) {

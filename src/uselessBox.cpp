@@ -3,7 +3,6 @@
 #include <switch.h>
 #include <ultrasonic.h>
 
-#define   BAUD_RATE             	9600
 #define   RANDOM_INIT_PIN         0
 
 /**
@@ -11,7 +10,6 @@
  * 
  */
 void setup() {
-  Serial.begin(BAUD_RATE);
   /*attaches motors*/
   attachServo();
   initSonicSensor();
@@ -29,5 +27,5 @@ void loop() {
   /*triggers motor if sensor is triggered */
   triggerMotor();
   /*just for debugging*/
-  printStatus();
+  getSwitchStatus();
 }
