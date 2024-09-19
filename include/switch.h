@@ -1,5 +1,5 @@
 /*switch pins*/
-#define   NO_1                    9
+#define   NO_1                    35
 #define   NO_2                    10
 
 #define   SELECT_NO1              1

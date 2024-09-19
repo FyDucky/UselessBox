@@ -20,7 +20,7 @@ void moveLidMotor(void);
  * @return int : random number
  */
 int randomValue(void) {
-  int randomNumber = random(1, 3);  
+  int randomNumber = random(1,4);  
   return randomNumber;
 }
 
@@ -47,7 +47,7 @@ void moveMotor(void) {
   int select = randomValue();
   /*box moves*/
   if(select == SELECT_NO1) {
-    //moveBoxMotor();
+    moveBoxMotor();
   }
   /*switch is pushed down*/
   else if(select == SELECT_NO2) {
@@ -83,7 +83,7 @@ void moveLidMotor(void) {
   static bool moved = false;  // Flag, um zu prüfen, ob der Servo bereits bewegt wurde
   
   //if (!moved) {
-    lidBox.write(100);   // Servo auf 200 Grad bewegen
+    lidBox.write(120);   // Servo auf 200 Grad bewegen
     delay(1000);          // Warte eine Sekunde, um die Bewegung abzuschließen
     lidBox.write(175);   // Servo auf 100 Grad zurückstellen
     moved = true;         // Flag setzen, dass der Servo bewegt wurde
