@@ -29,4 +29,7 @@ void loop() {
   triggerMotor();
   /*just for debugging*/
   getSwitchStatus();
+  //moveMotor();
+  //moveBoxMotor();
+  //moveLidMotor();
 }

@@ -31,7 +31,11 @@ int randomValue(void) {
 void attachServo(void) {
   motorBox.attach(BOX_MOTOR_PIN);
   switchBox.attach(SWITCH_MOTOR_PIN);
+  switchBox.write(180);
+  delay(1000);
   lidBox.attach(LID_MOTOR_PIN);
+  lidBox.write(175); 
+  delay(1000);        
 }
 
 /**
@@ -43,7 +47,7 @@ void moveMotor(void) {
   int select = randomValue();
   /*box moves*/
   if(select == SELECT_NO1) {
-    moveBoxMotor();
+    //moveBoxMotor();
   }
   /*switch is pushed down*/
   else if(select == SELECT_NO2) {
@@ -76,15 +80,14 @@ void moveBoxMotor(void) {
  */
 //TOD: add correct limits 
 void moveLidMotor(void) {
-  int pos = 0;
-    for (pos = LID_MOTOR_MIN; pos <= LID_MOTOR_MAX; pos += LID_MOTOR_STEPS) { // goes from 0 degrees to 180 degrees
-      lidBox.write(pos);                                  
-      delay(LID_MOTOR_DELAY);                                   
-  }
-  for (pos = LID_MOTOR_MAX; pos >= LID_MOTOR_MIN; pos -= LID_MOTOR_STEPS) { // goes from 180 degrees to 0 degrees            
-      lidBox.write(pos); 
-      delay(LID_MOTOR_DELAY);                       
-  }
+  static bool moved = false;  // Flag, um zu prüfen, ob der Servo bereits bewegt wurde
+  
+  //if (!moved) {
+    lidBox.write(100);   // Servo auf 200 Grad bewegen
+    delay(1000);          // Warte eine Sekunde, um die Bewegung abzuschließen
+    lidBox.write(175);   // Servo auf 100 Grad zurückstellen
+    moved = true;         // Flag setzen, dass der Servo bewegt wurde
+  //}
 }
 
 /**
@@ -93,15 +96,11 @@ void moveLidMotor(void) {
  * @param select : position of the switch
  */
 void switchMotor(int select) {
-  if(select == NO_1) {
-      switchBox.write(UPPER_LIMIT);
-      delay(SWITCH_MOTOR_DELAY);
-      switchBox.write(LOWER_LIMIT);
-      delay(SWITCH_MOTOR_DELAY);
-  }                                   
-  else {
-    ;
-  }
+
+      switchBox.write(40);
+      delay(1000);
+      switchBox.write(180);
+
   //delay(SWITCH_MOTOR_DELAY);
 }
 

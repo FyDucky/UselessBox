@@ -25,4 +25,7 @@
 
 void attachServo(void);
 void switchMotor(int select);
+void moveLidMotor(void);
 void moveMotor(void);
+void moveBoxMotor(void);
+
