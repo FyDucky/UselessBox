@@ -14,7 +14,6 @@ int switch_flag;
 void moveBoxMotor(void);
 void moveLidMotor(void);
 
-
 /**
  * @brief return randomly 1 or 2 
  * 
@@ -75,6 +74,7 @@ void moveBoxMotor(void) {
  * @brief moves the lid motor
  * 
  */
+//TOD: add correct limits 
 void moveLidMotor(void) {
   int pos = 0;
     for (pos = LID_MOTOR_MIN; pos <= LID_MOTOR_MAX; pos += LID_MOTOR_STEPS) { // goes from 0 degrees to 180 degrees
@@ -99,12 +99,6 @@ void switchMotor(int select) {
       switchBox.write(LOWER_LIMIT);
       delay(SWITCH_MOTOR_DELAY);
   }                                   
-  else if(select == NO_2) {           
-      //switchBox.write(LOWER_LIMIT);
-      //delay(SWITCH_MOTOR_DELAY);
-      //switchBox.write(UPPER_LIMIT);
-      //delay(SWITCH_MOTOR_DELAY);               
-  }
   else {
     ;
   }

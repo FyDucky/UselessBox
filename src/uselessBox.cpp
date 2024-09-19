@@ -12,8 +12,9 @@
 void setup() {
   /*attaches motors*/
   attachServo();
+  /*init des */
   initSonicSensor();
-  /*init random mechanism */
+  /*init random mechanism*/
   randomSeed(analogRead(RANDOM_INIT_PIN));
   /*inits the switch*/
   initSwitch();

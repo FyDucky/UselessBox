@@ -18,17 +18,12 @@ void initSwitch(void) {
 void getSwitchStatus(void) {
   /*write init status*/
   bool status_NO1 = digitalRead(NO_1) == LOW;
-  bool status_NO2 = digitalRead(NO_2) == LOW;
+  //bool status_NO2 = digitalRead(NO_2) == LOW;
 
   /*motor moves to upper limit*/
   if ((status_NO1 == HIGH)) {
     switchMotor(NO_1);
     delay(SWITCH_DELAY);
-  }
-  /*motor moves to lower limit*/
-  else if((status_NO2 == HIGH)) {
-    switchMotor(NO_2);
-    delay(SWITCH_DELAY);  
   }
   else {
     ;
