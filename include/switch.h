@@ -1,10 +1,7 @@
-/*switch pins*/
+/*switch pin*/
 #define   NO_1                    35
-#define   NO_2                    10
 
-#define   SELECT_NO1              1
-#define   SELECT_NO2              2
-
+/*delay for detecting*/
 #define   SWITCH_DELAY            100
 
 void initSwitch(void);

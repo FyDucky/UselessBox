@@ -25,11 +25,9 @@ void setup() {
  * 
  */
 void loop() {
-  /*triggers motor if sensor is triggered */
+  /*triggers motor if ultrasonic sensor is triggered */
   triggerMotor();
-  /*just for debugging*/
+  
+  /*detect the switch status and react*/
   getSwitchStatus();
-  //moveMotor();
-  //moveBoxMotor();
-  //moveLidMotor();
 }

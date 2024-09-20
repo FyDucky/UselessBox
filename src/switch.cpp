@@ -3,12 +3,11 @@
 #include <motors.h>
 
 /**
- * @brief init the switch and its pins
+ * @brief init the switch and its used pin
  * 
  */
 void initSwitch(void) {
   pinMode(NO_1, INPUT_PULLUP);
-  pinMode(NO_2, INPUT_PULLUP);
 }
 
 /**
@@ -16,15 +15,14 @@ void initSwitch(void) {
  * 
  */
 void getSwitchStatus(void) {
-  /*write init status*/
+  /*write init status of the switch*/
   bool status_NO1 = digitalRead(NO_1) == LOW;
-  //bool status_NO2 = digitalRead(NO_2) == LOW;
-
-  /*motor moves to upper limit*/
+  /*motor moves to upper limit if the switch was triggered*/
   if ((status_NO1 == HIGH)) {
-    switchMotor(NO_1);
+    moveSwitchMotor();
     delay(SWITCH_DELAY);
   }
+  /*nothing happens*/
   else {
     ;
   }

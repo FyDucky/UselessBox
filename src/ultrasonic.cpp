@@ -12,20 +12,26 @@ void initSonicSensor(void) {
 }
 
 /**
- * @brief Get the Distance object
+ * @brief Get the Distance object via ultrasonic measurement
  * 
- * @return float 
+ * @return float : returns the distance
  */
 float getDistance(void) {
   float duration, distance;
+  
+  /*get ultrasonic signals*/
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(SONIC_LOW);
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(SONIC_HIGH);
   digitalWrite(TRIG_PIN, LOW);
 
+  /*calculate the duration*/
   duration = pulseIn(ECHO_PIN, HIGH);
-  distance = (duration*.0343)/2;
+
+  /*calculate the distance*/
+  distance = (duration*.0343)/DIVISOR_DISTANCE;
+
   delay(ULTRASONIC_DELAY);
   return distance;
 }
@@ -39,11 +45,15 @@ void triggerMotor(void) {
 
   distance = getDistance();
 
+  /*if the trigger point is reached the either the box or the flap motor moves*/
   if(distance <= TRIGGER_POINT) {
       moveMotor();
   }
+  /*nothing happens*/
   else {
     ;
   }
-  delay(600);
+
+  /*delay to prevent that the system is not triggered to often*/
+  delay(MEASURE_DELAY);
 }

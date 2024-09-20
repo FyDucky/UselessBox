@@ -4,38 +4,39 @@
 #include <switch.h>
 
 /*init servo objects*/
-Servo motorBox;  
-Servo switchBox;
-Servo lidBox;
-
-int switch_flag;
-
-
-void moveBoxMotor(void);
-void moveLidMotor(void);
+Servo boxMotor;  
+Servo switchMotor;
+Servo flapMotor;
 
 /**
- * @brief return randomly 1 or 2 
+ * @brief return randomly 1,2 or 3
  * 
  * @return int : random number
  */
 int randomValue(void) {
-  int randomNumber = random(1,4);  
+  /*get random number*/
+  int randomNumber = random(MIN_RANDOM,MAX_RANDOM);  
   return randomNumber;
 }
 
 /**
- * @brief attaches motors to use them
+ * @brief attaches motors to use them and init the switch and lid-motor positions
  * 
  */
 void attachServo(void) {
-  motorBox.attach(BOX_MOTOR_PIN);
-  switchBox.attach(SWITCH_MOTOR_PIN);
-  switchBox.write(180);
-  delay(1000);
-  lidBox.attach(LID_MOTOR_PIN);
-  lidBox.write(175); 
-  delay(1000);        
+  /*attach motor that moves the box*/
+  boxMotor.attach(BOX_MOTOR_PIN);
+
+  /*attach motor that pulls back the switch and set it's init position*/
+  switchMotor.attach(SWITCH_MOTOR_PIN);
+  switchMotor.write(SWITCH_MOTOR_INIT_POS);
+  /*delay to secure the position*/
+  delay(DELAY_1000);
+
+  /*attach motor that lowers the switch and set it's init position*/
+  flapMotor.attach(FLAP_MOTOR_PIN);
+  flapMotor.write(FLAP_MOTOR_INIT_POS); 
+  delay(DELAY_1000);        
 }
 
 /**
@@ -45,14 +46,15 @@ void attachServo(void) {
 void moveMotor(void) {
   /*get random value*/
   int select = randomValue();
-  /*box moves*/
-  if(select == SELECT_NO1) {
+  /*box moves if random value = 1*/
+  if(select == MOVE_BOX) {
     moveBoxMotor();
   }
-  /*switch is pushed down*/
-  else if(select == SELECT_NO2) {
-    moveLidMotor();
+  /*switch is pushed down if random value = 2*/
+  else if(select == MOVE_FLAP) {
+    moveFlapMotor();
   }
+  /*nothing happens*/
   else {
     ;
   }
@@ -64,13 +66,15 @@ void moveMotor(void) {
  */
 void moveBoxMotor(void) {
   int pos = 0;
-    for (pos = BOX_MOTOR_MIN; pos <= BOX_MOTOR_MAX; pos += BOX_MOTOR_STEPS) { // goes from 0 degrees to 180 degrees
-      motorBox.write(pos);                              
-      delay(BOX_MOTOR_DELAY);                                   
+  /*go from 0 to 180 degrees*/
+  for (pos = BOX_MOTOR_MIN; pos <= BOX_MOTOR_MAX; pos += BOX_MOTOR_STEPS) { 
+    boxMotor.write(pos);                              
+    delay(BOX_MOTOR_DELAY);                                   
   }
-  for (pos = BOX_MOTOR_MAX; pos >= BOX_MOTOR_MIN; pos -= BOX_MOTOR_STEPS) { // goes from 180 degrees to 0 degrees
-      motorBox.write(pos);              
-      delay(BOX_MOTOR_DELAY);                       
+  /*go from 180 to 0 degrees*/
+  for (pos = BOX_MOTOR_MAX; pos >= BOX_MOTOR_MIN; pos -= BOX_MOTOR_STEPS) {
+    boxMotor.write(pos);              
+    delay(BOX_MOTOR_DELAY);                       
   }
 }
 
@@ -78,30 +82,24 @@ void moveBoxMotor(void) {
  * @brief moves the lid motor
  * 
  */
-//TOD: add correct limits 
-void moveLidMotor(void) {
-  static bool moved = false;  // Flag, um zu prüfen, ob der Servo bereits bewegt wurde
-  
-  //if (!moved) {
-    lidBox.write(120);   // Servo auf 200 Grad bewegen
-    delay(1000);          // Warte eine Sekunde, um die Bewegung abzuschließen
-    lidBox.write(175);   // Servo auf 100 Grad zurückstellen
-    moved = true;         // Flag setzen, dass der Servo bewegt wurde
-  //}
+void moveFlapMotor(void) {
+  /*lid is lowered to 120 degrees*/
+  flapMotor.write(FLAP_MOTOR_MAX_POS);   
+  delay(DELAY_1000);
+  /*motor moves back to */         
+  flapMotor.write(FLAP_MOTOR_INIT_POS);   
 }
 
 /**
- * @brief behaviour of the motor depending on the switch
+ * @brief motor pulls back the switch in init position
  * 
- * @param select : position of the switch
  */
-void switchMotor(int select) {
-
-      switchBox.write(40);
-      delay(1000);
-      switchBox.write(180);
-
-  //delay(SWITCH_MOTOR_DELAY);
+void moveSwitchMotor(void) {
+  /*motor moves to pull the switch back*/
+  switchMotor.write(SWITCH_MOTOR_MAX_POS);
+  delay(DELAY_1000);
+  /*switch is in init position*/
+  switchMotor.write(SWITCH_MOTOR_INIT_POS);
 }
 
 
