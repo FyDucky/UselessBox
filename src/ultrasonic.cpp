@@ -45,5 +45,5 @@ void triggerMotor(void) {
   else {
     ;
   }
-
+  delay(600);
 }
